@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valores climatológicos de abril</title>
+    <link rel="stylesheet" href="abril.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="btn"></div>
+    <script>
+      document.getElementById("btn").addEventListener("click", obtenerValores);
+      function obtenerValores() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "abril.json", true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == "200") {
+            var users = JSON.parse(xhr.responseText);
+            let names = "";
+            users.map((itm, idx) => {
+              names += "<li>" + itm.fecha + "</li>";
+            }, this);
+            document.getElementById("btn").innerHTML = names;
+          }
+        };
+        xhr.send(null);
+      }
+    </script>
+  </body>
+</html>
